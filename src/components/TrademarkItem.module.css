@@ -1,0 +1,22 @@
+.listwrap {
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    position: relative;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 1.1rem;
+    width: calc(100% - 45px);
+}
+
+.title span {
+    color: var(--sub-font);
+    margin-left: clamp(3px, 1vw, 8px);
+}
+
+.sub {
+    margin-top: 4px;
+    font-size: 1rem;
+}

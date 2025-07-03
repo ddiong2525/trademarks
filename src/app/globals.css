@@ -1,6 +1,74 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --font: #111111;
+  --sub-font: #888888;
+  --primary: #3E8DCD;
+  --btn-hover: #1F71B3;
+  --btn-select: #19639f;
+  --border: #dddddd;
+  --border-sub: #eeeeee;
+  --padding: 0 clamp(12px, 3vw, 24px);
+  --icon: clamp(24px, 5vw, 32px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.5;
+  background-color: var(--background);
+  color: var(--font);
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+main {
+      padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.icon {
+  width: var(--icon);
+  height: var(--icon);
+  position: relative;
+  cursor: pointer;
 }
