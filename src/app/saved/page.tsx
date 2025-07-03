@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import TrademarkItem from '@/components/TrademarkItem'
 import { useFavoriteStore } from '@/store/favoriteStore'
+import Modal from '@/components/Modal'
 import styles from '../page.module.css'
 
 interface Trademark {
@@ -13,12 +14,19 @@ interface Trademark {
   applicationNumber: string
   applicationDate: string
   registerStatus: string
+  publicationNumber: string
+  publicationDate: string
+  registrationNumber: string[] | null
+  registrationDate: string[] | null
 }
 
 export default function SavedPage() {
   const [data, setData] = useState<Trademark[]>([])
   const favorites = useFavoriteStore((state) => state.favorites)
   const router = useRouter()
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<Trademark | null>(null)
 
   useEffect(() => {
     fetch('/data/trademark_sample.json')
@@ -30,7 +38,12 @@ export default function SavedPage() {
         setData(filtered)
       })
       .catch(() => setData([]))
-  }, [favorites]) // ✅ 즐겨찾기 변경 시 자동 반영
+  }, [favorites])
+
+  const closeModal = () => {
+    setModalOpen(false)
+    setSelectedItem(null)
+  }
 
   return (
     <main>
@@ -57,8 +70,20 @@ export default function SavedPage() {
             applicationNumber={item.applicationNumber}
             applicationDate={item.applicationDate}
             registerStatus={item.registerStatus}
+            onClick={() => {
+              setSelectedItem(item)
+              setModalOpen(true)
+            }}
           />
         ))
+      )}
+
+      {selectedItem && (
+        <Modal
+          visible={modalOpen}
+          data={selectedItem}
+          onClose={closeModal}
+        />
       )}
     </main>
   )

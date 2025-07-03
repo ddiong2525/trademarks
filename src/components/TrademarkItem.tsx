@@ -18,7 +18,8 @@ export default function TrademarkItem({
   applicationNumber,
   applicationDate,
   registerStatus,
-}: Props) {
+  onClick,
+}: Props & { onClick?: () => void }) {
   // 전역 상태 훅 사용
   const toggleFavorite = useFavoriteStore((state) => state.toggleFavorite)
   const isFavorite = useFavoriteStore((state) =>
@@ -26,22 +27,26 @@ export default function TrademarkItem({
   )
 
   return (
-    <div
-      className={styles.listwrap}
-    >
+    <div className={styles.listwrap}>
       <div>
         <Image
-        src={isFavorite ? '/images/star_full.svg' : '/images/star.svg'}
-        alt="즐겨찾기"
-        width={32}
-        height={32}
-        style={{ position: 'absolute', top: 8, right: 8, cursor: 'pointer' }}
-        onClick={() => toggleFavorite(applicationNumber)}
-      />
+          src={isFavorite ? '/images/star_full.svg' : '/images/star.svg'}
+          alt="즐겨찾기"
+          width={32}
+          height={32}
+          style={{ position: 'absolute', top: 8, right: 8, cursor: 'pointer' }}
+          onClick={e => {
+            e.stopPropagation();
+            toggleFavorite(applicationNumber);
+          }}
+        />
       </div>
-      
 
-      <div className={styles.title}>
+      <div
+        className={styles.title}
+        onClick={onClick}
+        style={{ cursor: onClick ? 'pointer' : undefined }}
+      >
         {productName || '-'}
         {productNameEng && (
           <span>

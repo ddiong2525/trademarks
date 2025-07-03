@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import TrademarkItem from '@/components/TrademarkItem'
+import Modal from '@/components/Modal'
 import styles from "./page.module.css"
 
 interface Trademark {
@@ -21,6 +22,9 @@ export default function Home() {
   const [query, setQuery] = useState('')
   const [search, setSearch] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<Trademark | null>(null)
 
   useEffect(() => {
     fetch('/data/trademark_sample.json')
@@ -49,6 +53,11 @@ export default function Home() {
       })
       .slice(0, 5) // 최대 5개
     : []
+
+  const closeModal = () => {
+    setModalOpen(false)
+    setSelectedItem(null)
+  }
 
   return (
     <main>
@@ -124,8 +133,20 @@ export default function Home() {
           applicationNumber={item.applicationNumber}
           applicationDate={item.applicationDate}
           registerStatus={item.registerStatus}
+          onClick={() => {
+            setSelectedItem(item)
+            setModalOpen(true)
+          }}
         />
       ))}
+
+      {selectedItem && (
+        <Modal
+          visible={modalOpen}
+          data={selectedItem}
+          onClose={closeModal}
+        />
+      )}
     </main>
   )
 }
