@@ -32,7 +32,7 @@ export default function Modal({ visible, onClose, data }: ModalProps) {
 
     const formatDate = (dateStr?: string) => {
         if (!dateStr || dateStr.length !== 8) return dateStr || '-'
-        return `${dateStr.slice(0, 4)}.${dateStr.slice(4, 6)}.${dateStr.slice(6, 8)}`
+        return dateStr
     }
 
     const formatArray = (arr?: string[] | null) =>
