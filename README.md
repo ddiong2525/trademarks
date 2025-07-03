@@ -1,5 +1,5 @@
 1. 프로젝트 실행 방법
-데모 주소 : https://trademarks-git-main-jiwons-projects-a97e2acd.vercel.app/
+데모 주소 : https://trademarks-eight.vercel.app/
 레파지토리 : https://github.com/ddiong2525/trademarks.git
 
 2. 주요 기능
